@@ -1,9 +1,17 @@
-<script></script>
+<script>
+export default {
+    data() {
+        return {
+            city: '',
+        };
+    },
+};
+</script>
 
 <template>
     <div class="wrapper">
         <h1>Weather app</h1>
-        <p>Find out the weather in your city</p>
+        <p>Find out the weather in {{ city }}</p>
         <input type="text" placeholder="Enter city" />
         <button>Get weather</button>
     </div>
