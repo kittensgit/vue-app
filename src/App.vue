@@ -11,9 +11,14 @@ export default {
 <template>
     <div class="wrapper">
         <h1>Weather app</h1>
-        <p>Find out the weather in {{ city == '' ? 'your city' : city }}</p>
+        <p>
+            Find out the weather in
+            {{ city == '' ? 'your city' : '«' + city + '»' }}
+        </p>
         <input type="text" v-model="city" placeholder="Enter city" />
-        <button>Get weather</button>
+        <!-- <button v-show="city !== ''">Get weather</button> -->
+        <button v-if="city !== ''">Get weather</button>
+        <button v-else disabled>Enter the name city</button>
     </div>
 </template>
 
@@ -57,6 +62,10 @@ export default {
     margin-left: 20px;
     cursor: pointer;
     transition: transform 500ms ease;
+}
+.wrapper button:disabled {
+    background: #746027;
+    cursor: not-allowed;
 }
 .wrapper button:hover {
     transform: scale(1.1) translateY(-5px);
