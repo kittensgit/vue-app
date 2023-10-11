@@ -12,6 +12,18 @@ export default {
         cityName() {
             return '«' + this.city + '»';
         },
+        showTemp() {
+            return 'temperature: ' + this.info.main.temp;
+        },
+        showFeelsLike() {
+            return 'feels like: ' + this.info.main.feels_like;
+        },
+        showMinTemp() {
+            return 'min temperature: ' + this.info.main.temp_min;
+        },
+        showMaxTemp() {
+            return 'max temperature: ' + this.info.main.temp_max;
+        },
     },
     methods: {
         getWeather() {
@@ -26,7 +38,7 @@ export default {
                 .get(
                     `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=cbf7feaaafe60e2be6038d48a828d9c9`
                 )
-                .then((res) => (this.info = res));
+                .then((res) => (this.info = res.data));
         },
     },
 };
@@ -44,7 +56,12 @@ export default {
         <button v-if="city !== ''" @click="getWeather()">Get weather</button>
         <button v-else disabled>Enter the name city</button>
         <p class="error">{{ error }}</p>
-        <p v-show="info !== null">{{ info }}</p>
+        <div v-if="info !== null">
+            <p>{{ showTemp }}</p>
+            <p>{{ showFeelsLike }}</p>
+            <p>{{ showMinTemp }}</p>
+            <p>{{ showMaxTemp }}</p>
+        </div>
     </div>
 </template>
 
