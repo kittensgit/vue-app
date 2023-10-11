@@ -3,11 +3,22 @@ export default {
     data() {
         return {
             city: '',
+            error: '',
         };
     },
     computed: {
         cityName() {
             return '«' + this.city + '»';
+        },
+    },
+    methods: {
+        getWeather() {
+            if (this.city.trim().length < 2) {
+                this.error = 'Need more than one character name';
+                return false;
+            }
+
+            this.error = '';
         },
     },
 };
@@ -22,12 +33,16 @@ export default {
         </p>
         <input type="text" v-model="city" placeholder="Enter city" />
         <!-- <button v-show="city !== ''">Get weather</button> -->
-        <button v-if="city !== ''">Get weather</button>
+        <button v-if="city !== ''" @click="getWeather()">Get weather</button>
         <button v-else disabled>Enter the name city</button>
+        <p class="error">{{ error }}</p>
     </div>
 </template>
 
 <style scoped>
+.error {
+    color: #d03939;
+}
 .wrapper {
     width: 900px;
     height: 500px;
