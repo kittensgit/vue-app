@@ -1,9 +1,11 @@
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
             city: '',
             error: '',
+            info: null,
         };
     },
     computed: {
@@ -19,6 +21,12 @@ export default {
             }
 
             this.error = '';
+
+            axios
+                .get(
+                    `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=cbf7feaaafe60e2be6038d48a828d9c9`
+                )
+                .then((res) => (this.info = res));
         },
     },
 };
@@ -36,6 +44,7 @@ export default {
         <button v-if="city !== ''" @click="getWeather()">Get weather</button>
         <button v-else disabled>Enter the name city</button>
         <p class="error">{{ error }}</p>
+        <p v-show="info !== null">{{ info }}</p>
     </div>
 </template>
 
