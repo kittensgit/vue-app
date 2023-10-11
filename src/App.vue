@@ -5,6 +5,11 @@ export default {
             city: '',
         };
     },
+    computed: {
+        cityName() {
+            return '«' + this.city + '»';
+        },
+    },
 };
 </script>
 
@@ -13,7 +18,7 @@ export default {
         <h1>Weather app</h1>
         <p>
             Find out the weather in
-            {{ city == '' ? 'your city' : '«' + city + '»' }}
+            {{ city == '' ? 'your city' : cityName }}
         </p>
         <input type="text" v-model="city" placeholder="Enter city" />
         <!-- <button v-show="city !== ''">Get weather</button> -->
